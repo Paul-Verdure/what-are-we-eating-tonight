@@ -17,6 +17,11 @@ export default defineSchema(
     numbers: defineTable({
       value: v.number(),
     }),
+    recipe: defineTable({
+      name: v.string(),
+      ingredients: v.array(v.string()),
+      instructions: v.array(v.string()),
+    }),
   },
   // If you ever get an error about schema mismatch
   // between your data and your schema, and you cannot
