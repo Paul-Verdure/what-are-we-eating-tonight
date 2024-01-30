@@ -1,14 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { SignInButton, UserButton } from "@clerk/clerk-react";
-import {
-  Authenticated,
-  Unauthenticated,
-  useAction,
-  useMutation,
-  useQuery,
-} from "convex/react";
+import { SignInButton } from "@clerk/clerk-react";
+import { Authenticated, Unauthenticated, useAction } from "convex/react";
 import { api } from "../convex/_generated/api";
-import { toNamespacedPath } from "path";
 import { useState } from "react";
 
 export default function App() {
