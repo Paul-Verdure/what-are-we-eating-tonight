@@ -9,10 +9,11 @@ export const getRecipesTitles = action({
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
-    const prompt =
-      "Someone is opening its fridge and kitchen cupboard. They find the following ingredients: " +
-      ingredients.join(", ") +
-      ". They want to cook a main dish with these ingredients. What should they cook. Provide them with 10 different recipes titles.";
+
+    const prompt = `Someone is opening its fridge and kitchen cupboard. They find the following ingredients: ${ingredients.join(
+      ", "
+    )}. They want to cook a main dish with these ingredients. What should they cook? Provide them with 8 different recipe titles only. Return the titles as a JavaScript array of strings, like this example: ["Recipe Title 1", "Recipe Title 2", ...]`;
+
     console.log("prompt", prompt);
 
     const chatCompletion = await openai.chat.completions.create({
@@ -25,6 +26,6 @@ export const getRecipesTitles = action({
       model: "gpt-3.5-turbo",
     });
     console.log(chatCompletion.choices[0].message);
-    return chatCompletion.choices[0].message.content;
+    return [chatCompletion?.choices[0]?.message?.content].filter(Boolean);
   },
 });
