@@ -15,9 +15,11 @@ export default function App() {
     "basil",
     "olive oil",
   ];
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const getTitles = useAction(api.openai.getRecipesTitles);
+
+  console.log(response);
 
   return (
     <main className="container max-w-2xl flex flex-col gap-8">
@@ -39,9 +41,13 @@ export default function App() {
           onClick={() => {
             setLoading(true);
             getTitles({ ingredients: INGREDIENTS })
-              .then((titles) => {
+              .then((titles: (string | null)[]) => {
                 setLoading(false);
-                setResponse(titles);
+                if (titles?.length !== 0) {
+                  setResponse(
+                    titles.filter((title): title is string => title !== null)
+                  );
+                }
               })
               .catch((error) => {
                 console.error(error);
@@ -50,6 +56,17 @@ export default function App() {
         >
           Get Recipes
         </button>
+        <section>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <div>
+              {response.map((title, index) => {
+                return <p key={index}>{title}</p>;
+              })}
+            </div>
+          )}
+        </section>
       </div>
     </main>
   );
