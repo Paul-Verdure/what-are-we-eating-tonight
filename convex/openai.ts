@@ -10,20 +10,45 @@ export const getRecipesTitles = action({
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    const prompt = `Someone is opening its fridge and kitchen cupboard. They find the following ingredients: ${ingredients.join(
+    const prompt = `Create a list of 8 recipes that can be made with the following ingredients: ${ingredients.join(
       ", "
-    )}. They want to cook a main dish with these ingredients. What should they cook? Provide them with 8 different recipe titles only. Return the titles as a JavaScript array of strings, like this example: ["Recipe Title 1", "Recipe Title 2", ...]`;
+    )}.
+    Do not include any explanations, only provide a  RFC8259 compliant JSON response  following this format without deviation.
+    [{
+        "recipe": "Recipe Title 1",
+        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+      }, {
+        "recipe": "Recipe Title 2",
+        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+      }, {
+        "recipe": "Recipe Title 3",
+        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+      }, {
+        "recipe": "Recipe Title 4",
+        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+      }, {
+        "recipe": "Recipe Title 5",
+        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+      }, {
+        "recipe": "Recipe Title 6",
+        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+      }, {
+        "recipe": "Recipe Title 7",
+        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+      }, {
+        "recipe": "Recipe Title 8",
+        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+      }]
+    `;
 
-    console.log("prompt", prompt);
+
 
     const chatCompletion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo-0613",
       messages: [
-        {
-          role: "user",
-          content: prompt,
-        },
+        { role: "system", content: "You are a helpful recipe assistant." },
+        { role: "user", content: prompt },
       ],
-      model: "gpt-3.5-turbo",
     });
     console.log(chatCompletion.choices[0].message);
     return chatCompletion?.choices[0]?.message?.content;
