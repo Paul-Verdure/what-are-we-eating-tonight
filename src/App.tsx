@@ -3,6 +3,8 @@ import { SignInButton } from "@clerk/clerk-react";
 import { Authenticated, Unauthenticated, useAction } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { useState } from "react";
+import { get } from "http";
+import { RecipeOptions } from "./types";
 
 export default function App() {
   //
@@ -15,11 +17,27 @@ export default function App() {
     "basil",
     "olive oil",
   ];
-  const [response, setResponse] = useState<string[]>([]);
+  const [response, setResponse] = useState<RecipeOptions>([]);
   const [loading, setLoading] = useState(false);
   const getTitles = useAction(api.openai.getRecipesTitles);
 
   console.log(response);
+
+  function handleClick() {
+    setLoading(true);
+    getTitles({ ingredients: INGREDIENTS })
+      .then((result) => {
+        console.log(result);
+        if (result) {
+          setResponse(JSON.parse(result));
+          setLoading(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }
 
   return (
     <main className="container max-w-2xl flex flex-col gap-8">
@@ -37,26 +55,8 @@ export default function App() {
         </div>
       </Unauthenticated>
       <div className="flex justify-center">
-        <button
-          onClick={() => {
-            setLoading(true);
-            getTitles({ ingredients: INGREDIENTS })
-              .then((titles: (string | null)[]) => {
-                setLoading(false);
-                if (titles?.length !== 0) {
-                  setResponse(
-                    titles.filter((title): title is string => title !== null)
-                  );
-                }
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          }}
-        >
-          Get Recipes
-        </button>
-        <section>
+        <button onClick={handleClick}>Get Recipes</button>
+        {/* <section>
           {loading ? (
             <p>Loading...</p>
           ) : (
@@ -66,7 +66,7 @@ export default function App() {
               })}
             </div>
           )}
-        </section>
+        </section> */}
       </div>
     </main>
   );
