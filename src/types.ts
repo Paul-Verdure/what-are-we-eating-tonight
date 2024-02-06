@@ -4,8 +4,8 @@ export type IngredientsOptions = {
 }[];
 
 export type Recipe = {
-  recipe: string;
-  ingredients: string[];
+  title: string;
+  description: string;
 };
 
 export type RecipeOptions = Recipe[];
