@@ -42,39 +42,36 @@ export default function RecipeFinder() {
     <section className="w-full py-12">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col gap-6">
-          <h1 className="text-3xl font-bold tracking-tighter">Find Recipes</h1>
+          <h1 className="text-3xl font-bold tracking-tighter">What are we eating tonight</h1>
           <p className="text-gray-500 dark:text-gray-400">
-            Enter up to 10 ingredients to find the perfect recipe.
+            Check what's in the fridge and let's find a recipe for tonight's dinner.
           </p>
           <div className="flex flex-wrap gap-2">
-            <div>
-              <div>Tomato</div>
-            </div>
-            <div>
-              <div>Onion</div>
-            </div>
-            <div>
-              <div>Garlic</div>
-            </div>
+            {INGREDIENTS?.map((ingredient) => (
+              <span
+                key={ingredient}
+                className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-full"
+              >
+                {ingredient}
+              </span>
+            ))}
           </div>
           <div className="flex gap-2">
             <Input placeholder="Enter an ingredient" />
-            <Button >Add Ingredient</Button>
+            <Button>Add Ingredient</Button>
           </div>
-          <Button variant="outline" onClick={handleClick}>Find Recipes</Button>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {loading ? (
-              <div className="animate-pulse">
+          <Button variant="outline" onClick={handleClick}>
+            Find Recipes
+          </Button>
+          {loading ? (
+            <div className="animate-pulse container">
+              <h3 className="font-semibold tracking-tight text-center">Loading...</h3>
+            </div>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {response?.map((recipe) => (
                 <Card>
-                  <CardContent>
-                    <h3 className="font-semibold tracking-tight">Loading...</h3>
-                  </CardContent>
-                </Card>
-              </div>
-            ) : (
-              response?.map((recipe) => (
-                <Card>
-                  <CardContent>
+                  <CardContent className="p-4">
                     <h3 className="font-semibold tracking-tight">
                       {recipe?.title}
                     </h3>
@@ -83,9 +80,9 @@ export default function RecipeFinder() {
                     </p>
                   </CardContent>
                 </Card>
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
