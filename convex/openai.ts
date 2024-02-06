@@ -15,29 +15,36 @@ export const getRecipesTitles = action({
     )}.
     Do not include any explanations, only provide a  RFC8259 compliant JSON response  following this format without deviation.
     [{
-        "recipe": "Recipe Title 1",
-        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+        "title": "Recipe Title 1",
+        "description": "Recipe description 1",
       }, {
-        "recipe": "Recipe Title 2",
-        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+        "title": "Recipe Title 2",
+        "description": "Recipe description 2",
+
       }, {
-        "recipe": "Recipe Title 3",
-        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+        "title": "Recipe Title 3",
+        "description": "Recipe description 3",
+
       }, {
-        "recipe": "Recipe Title 4",
-        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+        "title": "Recipe Title 4",
+        "description": "Recipe description ",
+
       }, {
-        "recipe": "Recipe Title 5",
-        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+        "title": "Recipe Title 5",
+        "description": "Recipe description 5",
+
       }, {
-        "recipe": "Recipe Title 6",
-        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+        "title": "Recipe Title 6",
+        "description": "Recipe description 6",
+
       }, {
-        "recipe": "Recipe Title 7",
-        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+        "title": "Recipe Title 7",
+        "description": "Recipe description 7",
+
       }, {
-        "recipe": "Recipe Title 8",
-        "ingredients": ["ingredient1", "ingredient2", "ingredient3"]
+        "title": "Recipe Title 8",
+        "description": "Recipe description 8",
+
       }]
     `;
 
