@@ -14,7 +14,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
 
 const FormSchema = z.object({
   ingredient: z.string().min(2, {
@@ -30,19 +29,15 @@ export function IngredientsInput() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof FormSchema>, event: React.BaseSyntheticEvent | undefined) {
-    event?.preventDefault();
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
-  }
+  const onSubmit = (data: z.infer<typeof FormSchema>) => {
+    // Prevent the default form submission behavior
+    // (this should be handled by react-hook-form)
+    console.log(data);
+  };
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={() => form.handleSubmit(onSubmit)}
-        className="w-2/3 space-y-6"
-      >
+      <div className="w-2/3 space-y-6">
         <FormField
           control={form.control}
           name="ingredient"
@@ -56,8 +51,10 @@ export function IngredientsInput() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
-      </form>
+        <Button type="submit" onClick={form.handleSubmit(onSubmit)}>
+          Submit
+        </Button>
+      </div>
     </Form>
   );
 }
