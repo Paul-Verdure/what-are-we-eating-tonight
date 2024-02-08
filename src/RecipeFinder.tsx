@@ -1,4 +1,3 @@
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CardContent, Card } from "@/components/ui/card";
 import { useState } from "react";
@@ -6,16 +5,20 @@ import { useAction } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { RecipeOptions } from "./types";
 
+import { IngredientsInput } from "./components/IngredientsInput";
+
 export default function RecipeFinder() {
-  const INGREDIENTS = [
-    "garlic",
-    "tomato",
-    "onion",
-    "zucchini",
-    "mozzarella",
-    "basil",
-    "olive oil",
-  ];
+  // const INGREDIENTS = [
+  //   "garlic",
+  //   "tomato",
+  //   "onion",
+  //   "zucchini",
+  //   "mozzarella",
+  //   "basil",
+  //   "olive oil",
+  // ];
+
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
   const [response, setResponse] = useState<RecipeOptions>([]);
   const [loading, setLoading] = useState(false);
   const getTitles = useAction(api.openai.getRecipesTitles);
@@ -24,7 +27,7 @@ export default function RecipeFinder() {
 
   function handleClick() {
     setLoading(true);
-    getTitles({ ingredients: INGREDIENTS })
+    getTitles({ ingredients: selectedIngredients })
       .then((result) => {
         console.log(result);
         if (result) {
@@ -42,12 +45,15 @@ export default function RecipeFinder() {
     <section className="w-full py-12">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col gap-6">
-          <h1 className="text-3xl font-bold tracking-tighter">What are we eating tonight</h1>
+          <h1 className="text-3xl font-bold tracking-tighter">
+            What are we eating tonight
+          </h1>
           <p className="text-gray-500 dark:text-gray-400">
-            Check what's in the fridge and let's find a recipe for tonight's dinner.
+            Check what's in the fridge and let's find a recipe for tonight's
+            dinner.
           </p>
           <div className="flex flex-wrap gap-2">
-            {INGREDIENTS?.map((ingredient) => (
+            {selectedIngredients?.map((ingredient) => (
               <span
                 key={ingredient}
                 className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-full"
@@ -57,15 +63,16 @@ export default function RecipeFinder() {
             ))}
           </div>
           <div className="flex gap-2">
-            <Input placeholder="Enter an ingredient" />
-            <Button>Add Ingredient</Button>
+            <IngredientsInput />
           </div>
           <Button variant="outline" onClick={handleClick}>
             Find Recipes
           </Button>
           {loading ? (
             <div className="animate-pulse container">
-              <h3 className="font-semibold tracking-tight text-center">Loading...</h3>
+              <h3 className="font-semibold tracking-tight text-center">
+                Loading...
+              </h3>
             </div>
           ) : (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
