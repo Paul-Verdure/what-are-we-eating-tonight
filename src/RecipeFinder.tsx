@@ -63,7 +63,7 @@ export default function RecipeFinder() {
             ))}
           </div>
           <div className="flex gap-2">
-            <IngredientsInput />
+            <IngredientsInput setSelectedIngredients={setSelectedIngredients} />
           </div>
           <Button variant="outline" onClick={handleClick}>
             Find Recipes

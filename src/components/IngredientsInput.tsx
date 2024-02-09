@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,10 +11,10 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Dispatch } from "react";
 
 const FormSchema = z.object({
   ingredient: z.string().min(2, {
@@ -21,7 +22,13 @@ const FormSchema = z.object({
   }),
 });
 
-export function IngredientsInput() {
+type IngredientsInputProps = {
+  setSelectedIngredients: Dispatch<React.SetStateAction<string[]>>;
+};
+
+export function IngredientsInput({
+  setSelectedIngredients,
+}: IngredientsInputProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -30,9 +37,10 @@ export function IngredientsInput() {
   });
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    // Prevent the default form submission behavior
-    // (this should be handled by react-hook-form)
-    console.log(data);
+    console.log(data.ingredient);
+    setSelectedIngredients((prev: string[]) => [...prev, data.ingredient]);
+
+    form.reset();
   };
 
   return (
@@ -43,7 +51,6 @@ export function IngredientsInput() {
           name="ingredient"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input placeholder="Enter an ingredient" {...field} />
               </FormControl>
