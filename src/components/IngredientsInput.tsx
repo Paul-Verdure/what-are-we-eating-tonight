@@ -17,8 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Dispatch } from "react";
-import { Checkbox } from "@radix-ui/react-checkbox";
-
+import { Checkbox } from "@/components/ui/checkbox";
 const FormSchema = z.object({
   ingredient: z.string().min(2, {
     message: "Ingredient must be at least 2 characters.",
@@ -99,10 +98,7 @@ export function IngredientsInput({
           render={() => (
             <FormItem>
               <div className="mb-4">
-                <FormLabel className="text-base">Sidebar</FormLabel>
-                <FormDescription>
-                  Select the items you want to display in the sidebar.
-                </FormDescription>
+                <FormDescription>Select your food preferences</FormDescription>
               </div>
               {items.map((item) => (
                 <FormField
