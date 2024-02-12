@@ -19,27 +19,24 @@ import { Input } from "@/components/ui/input";
 import { Dispatch } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { foodPreferences, mealChoices } from "./checkboxLists";
+
 const FormSchema = z.object({
   ingredient: z.string().min(2, {
     message: "Ingredient must be at least 2 characters.",
   }),
-  foodPreferences: z.array(z.string()).refine((value) => value.some((item) => item), {
-    message: "You have to select at least one item.",
-  }),
-  mealChoices: z.array(z.string()).refine((value) => value.some((item) => item), {
-    message: "You have to select at least one item.",
-  }),
+  foodPreferences: z.array(z.string()),
+  mealChoices: z
+    .array(z.string())
+    .refine((value) => value.some((item) => item), {
+      message: "You have to select at least one item.",
+    }),
 });
 
 type FinderInputsProps = {
   setSelectedIngredients: Dispatch<React.SetStateAction<string[]>>;
 };
 
-export function FinderInputs({
-  setSelectedIngredients,
-}: FinderInputsProps) {
- 
-
+export function FinderInputs({ setSelectedIngredients }: FinderInputsProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -117,7 +114,7 @@ export function FinderInputs({
             </FormItem>
           )}
         />
-                <FormField
+        <FormField
           control={form.control}
           name="foodPreferences"
           render={() => (
