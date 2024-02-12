@@ -5,7 +5,7 @@ import { useAction } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { RecipeOptions } from "./types";
 
-import { IngredientsInput } from "./components/IngredientsInput";
+import { FinderInputs } from "./components/FinderInputs/FinderInputs";
 
 export default function RecipeFinder() {
   // const INGREDIENTS = [
@@ -63,7 +63,7 @@ export default function RecipeFinder() {
             ))}
           </div>
           <div className="flex gap-2">
-            <IngredientsInput setSelectedIngredients={setSelectedIngredients} />
+            <FinderInputs setSelectedIngredients={setSelectedIngredients} />
           </div>
           <Button variant="outline" onClick={handleClick}>
             Find Recipes

@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Dispatch } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { foodPreferences } from "./checkboxLists";
 const FormSchema = z.object({
   ingredient: z.string().min(2, {
     message: "Ingredient must be at least 2 characters.",
@@ -27,39 +28,14 @@ const FormSchema = z.object({
   }),
 });
 
-type IngredientsInputProps = {
+type FinderInputsProps = {
   setSelectedIngredients: Dispatch<React.SetStateAction<string[]>>;
 };
 
-export function IngredientsInput({
+export function FinderInputs({
   setSelectedIngredients,
-}: IngredientsInputProps) {
-  const items = [
-    {
-      id: "recents",
-      label: "Recents",
-    },
-    {
-      id: "home",
-      label: "Home",
-    },
-    {
-      id: "applications",
-      label: "Applications",
-    },
-    {
-      id: "desktop",
-      label: "Desktop",
-    },
-    {
-      id: "downloads",
-      label: "Downloads",
-    },
-    {
-      id: "documents",
-      label: "Documents",
-    },
-  ] as const;
+}: FinderInputsProps) {
+ 
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -100,7 +76,7 @@ export function IngredientsInput({
               <div className="mb-4">
                 <FormDescription>Select your food preferences</FormDescription>
               </div>
-              {items.map((item) => (
+              {foodPreferences.map((item) => (
                 <FormField
                   key={item.id}
                   control={form.control}
