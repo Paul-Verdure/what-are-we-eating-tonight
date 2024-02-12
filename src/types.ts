@@ -9,3 +9,10 @@ export type Recipe = {
 };
 
 export type RecipeOptions = Recipe[];
+
+export type CheckboxItem = {
+  id: string;
+  label: string;
+};
+
+export type CheckboxItems = CheckboxItem[];
