@@ -23,7 +23,7 @@ const FormSchema = z.object({
   ingredient: z.string().min(2, {
     message: "Ingredient must be at least 2 characters.",
   }),
-  items: z.array(z.string()).refine((value) => value.some((item) => item), {
+  foodPreferences: z.array(z.string()).refine((value) => value.some((item) => item), {
     message: "You have to select at least one item.",
   }),
 });
@@ -41,7 +41,7 @@ export function FinderInputs({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       ingredient: "",
-      items: [],
+      foodPreferences: [],
     },
   });
 
@@ -70,7 +70,7 @@ export function FinderInputs({
 
         <FormField
           control={form.control}
-          name="items"
+          name="foodPreferences"
           render={() => (
             <FormItem>
               <div className="mb-4">
@@ -80,7 +80,7 @@ export function FinderInputs({
                 <FormField
                   key={item.id}
                   control={form.control}
-                  name="items"
+                  name="foodPreferences"
                   render={({ field }) => {
                     return (
                       <FormItem
