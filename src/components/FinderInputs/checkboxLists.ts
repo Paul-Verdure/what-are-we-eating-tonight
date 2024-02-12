@@ -38,3 +38,22 @@ export const foodPreferences: CheckboxItems = [
     label: "Pork-free",
   },
 ] as const;
+
+export const mealChoices: CheckboxItems = [
+  {
+    id: "breakfast",
+    label: "Breakfast",
+  },
+  {
+    id: "lunch",
+    label: "Lunch",
+  },
+  {
+    id: "dinner",
+    label: "Dinner",
+  },
+  {
+    id: "snack",
+    label: "Snack",
+  },
+] as const;
