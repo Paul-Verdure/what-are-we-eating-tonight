@@ -34,9 +34,15 @@ const FormSchema = z.object({
 
 type FinderInputsProps = {
   setSelectedIngredients: Dispatch<React.SetStateAction<string[]>>;
+  setSelectedPreferences: Dispatch<React.SetStateAction<string[]>>;
+  setSelectedMeal: Dispatch<React.SetStateAction<string | undefined>>;
 };
 
-export function FinderInputs({ setSelectedIngredients }: FinderInputsProps) {
+export function FinderInputs({
+  setSelectedIngredients,
+  setSelectedPreferences,
+  setSelectedMeal,
+}: FinderInputsProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -47,9 +53,10 @@ export function FinderInputs({ setSelectedIngredients }: FinderInputsProps) {
   });
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    console.log(data.ingredient);
+    console.log(data);
     setSelectedIngredients((prev: string[]) => [...prev, data.ingredient]);
-
+    setSelectedPreferences(data.foodPreferences);
+    setSelectedMeal(data.mealChoices[0]);
     form.reset();
   };
 

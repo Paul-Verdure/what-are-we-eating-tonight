@@ -8,17 +8,9 @@ import { RecipeOptions } from "./types";
 import { FinderInputs } from "./components/FinderInputs/FinderInputs";
 
 export default function RecipeFinder() {
-  // const INGREDIENTS = [
-  //   "garlic",
-  //   "tomato",
-  //   "onion",
-  //   "zucchini",
-  //   "mozzarella",
-  //   "basil",
-  //   "olive oil",
-  // ];
-
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+  const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
+  const [selectedMeal, setSelectedMeal] = useState<string>();
   const [response, setResponse] = useState<RecipeOptions>([]);
   const [loading, setLoading] = useState(false);
   const getTitles = useAction(api.openai.getRecipesTitles);
@@ -63,7 +55,11 @@ export default function RecipeFinder() {
             ))}
           </div>
           <div className="flex gap-2">
-            <FinderInputs setSelectedIngredients={setSelectedIngredients} />
+            <FinderInputs
+              setSelectedIngredients={setSelectedIngredients}
+              setSelectedPreferences={setSelectedPreferences}
+              setSelectedMeal={setSelectedMeal}
+            />
           </div>
           <Button variant="outline" onClick={handleClick}>
             Find Recipes
