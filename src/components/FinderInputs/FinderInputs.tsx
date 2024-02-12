@@ -18,12 +18,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Dispatch } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { foodPreferences } from "./checkboxLists";
+import { foodPreferences, mealChoices } from "./checkboxLists";
 const FormSchema = z.object({
   ingredient: z.string().min(2, {
     message: "Ingredient must be at least 2 characters.",
   }),
   foodPreferences: z.array(z.string()).refine((value) => value.some((item) => item), {
+    message: "You have to select at least one item.",
+  }),
+  mealChoices: z.array(z.string()).refine((value) => value.some((item) => item), {
     message: "You have to select at least one item.",
   }),
 });
@@ -42,6 +45,7 @@ export function FinderInputs({
     defaultValues: {
       ingredient: "",
       foodPreferences: [],
+      mealChoices: [],
     },
   });
 
@@ -81,6 +85,51 @@ export function FinderInputs({
                   key={item.id}
                   control={form.control}
                   name="foodPreferences"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={item.id}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(item.id)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, item.id])
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== item.id
+                                    )
+                                  );
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal">
+                          {item.label}
+                        </FormLabel>
+                      </FormItem>
+                    );
+                  }}
+                />
+              ))}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+                <FormField
+          control={form.control}
+          name="foodPreferences"
+          render={() => (
+            <FormItem>
+              <div className="mb-4">
+                <FormDescription>Select a meal</FormDescription>
+              </div>
+              {mealChoices.map((item) => (
+                <FormField
+                  key={item.id}
+                  control={form.control}
+                  name="mealChoices"
                   render={({ field }) => {
                     return (
                       <FormItem
