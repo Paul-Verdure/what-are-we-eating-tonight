@@ -70,7 +70,7 @@ export default function RecipeFinder() {
                   key={preference.id}
                   id={preference.id}
                   checked={selectedPreferences.includes(preference.id)}
-                  onChange={() => {
+                  onCheckedChange={() => {
                     if (selectedPreferences.includes(preference.id)) {
                       setSelectedPreferences(
                         selectedPreferences.filter(
