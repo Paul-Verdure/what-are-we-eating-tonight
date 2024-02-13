@@ -6,6 +6,8 @@ import { api } from "../convex/_generated/api";
 import { RecipeOptions } from "./types";
 
 import { FinderInputs } from "./components/FinderInputs/FinderInputs";
+import { foodPreferences } from "./components/FinderInputs/checkboxLists";
+import { Checkbox } from "./components/ui/checkbox";
 
 export default function RecipeFinder() {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
@@ -33,6 +35,9 @@ export default function RecipeFinder() {
       });
   }
 
+  console.log('selectedPreferences', selectedPreferences);
+  console.log('preferences', foodPreferences);
+
   return (
     <section className="w-full py-12">
       <div className="container px-4 md:px-6">
@@ -55,11 +60,33 @@ export default function RecipeFinder() {
             ))}
           </div>
           <div className="flex gap-2">
-            <FinderInputs
-              setSelectedIngredients={setSelectedIngredients}
-              setSelectedPreferences={setSelectedPreferences}
-              setSelectedMeal={setSelectedMeal}
-            />
+            <FinderInputs setSelectedIngredients={setSelectedIngredients} />
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {foodPreferences?.map((preference) => (
+              <div className="flex items-center space-x-2">
+                <label htmlFor={preference.id}>{preference.label}</label>
+                <Checkbox
+                  key={preference.id}
+                  id={preference.id}
+                  checked={selectedPreferences.includes(preference.id)}
+                  onChange={() => {
+                    if (selectedPreferences.includes(preference.id)) {
+                      setSelectedPreferences(
+                        selectedPreferences.filter(
+                          (item) => item !== preference.id
+                        )
+                      );
+                    } else {
+                      setSelectedPreferences([
+                        ...selectedPreferences,
+                        preference.id,
+                      ]);
+                    }
+                  }}
+                />
+              </div>
+            ))}
           </div>
           <Button variant="outline" onClick={handleClick}>
             Find Recipes
