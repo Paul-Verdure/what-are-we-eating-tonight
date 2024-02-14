@@ -11,6 +11,7 @@ import {
   mealChoices,
 } from "./components/FinderInputs/checkboxLists";
 import { Checkbox } from "./components/ui/checkbox";
+import { Cross1Icon } from "@radix-ui/react-icons";
 
 export default function RecipeFinder() {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
@@ -38,6 +39,12 @@ export default function RecipeFinder() {
       });
   }
 
+  function removeIngredient(ingredient: string) {
+    setSelectedIngredients((prev: string[]) =>
+      prev.filter((item) => item !== ingredient)
+    );
+  }
+
   return (
     <section className="w-full py-12">
       <div className="container px-4 md:px-6">
@@ -53,9 +60,13 @@ export default function RecipeFinder() {
             {selectedIngredients?.map((ingredient) => (
               <span
                 key={ingredient}
-                className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-full"
+                className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-full flex gap-1 items-center"
               >
                 {ingredient}
+                <Cross1Icon
+                  className="cursor-pointer"
+                  onClick={() => removeIngredient(ingredient)}
+                />
               </span>
             ))}
           </div>
