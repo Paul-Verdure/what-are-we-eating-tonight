@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Dispatch } from "react";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 const FormSchema = z.object({
   ingredient: z.string().min(2, {
@@ -40,23 +41,37 @@ export function FinderInputs({ setSelectedIngredients }: FinderInputsProps) {
     form.reset();
   };
 
+  async function handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter") {
+      await form.handleSubmit(onSubmit)();
+    }
+  }
+
   return (
     <Form {...form}>
-      <div className="w-2/3 space-y-6">
+      <div className="w-2/3 flex flex-wrap gap-2">
         <FormField
           control={form.control}
           name="ingredient"
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Enter an ingredient" {...field} />
+                <Input
+                  placeholder="Enter an ingredient"
+                  {...field}
+                  onKeyDown={(e) => handleKeyPress(e)}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" onClick={form.handleSubmit(onSubmit)}>
-          Submit
+        <Button
+          type="submit"
+          onClick={form.handleSubmit(onSubmit)}
+          className="flex items-center"
+        >
+          <PlusIcon />
         </Button>
       </div>
     </Form>
