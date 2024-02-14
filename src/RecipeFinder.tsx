@@ -6,7 +6,10 @@ import { api } from "../convex/_generated/api";
 import { RecipeOptions } from "./types";
 
 import { FinderInputs } from "./components/FinderInputs/FinderInputs";
-import { foodPreferences } from "./components/FinderInputs/checkboxLists";
+import {
+  foodPreferences,
+  mealChoices,
+} from "./components/FinderInputs/checkboxLists";
 import { Checkbox } from "./components/ui/checkbox";
 
 export default function RecipeFinder() {
@@ -35,9 +38,6 @@ export default function RecipeFinder() {
       });
   }
 
-  console.log('selectedPreferences', selectedPreferences);
-  console.log('preferences', foodPreferences);
-
   return (
     <section className="w-full py-12">
       <div className="container px-4 md:px-6">
@@ -62,31 +62,52 @@ export default function RecipeFinder() {
           <div className="flex gap-2">
             <FinderInputs setSelectedIngredients={setSelectedIngredients} />
           </div>
-          <div className="flex flex-wrap gap-2">
-            {foodPreferences?.map((preference) => (
-              <div className="flex items-center space-x-2">
-                <label htmlFor={preference.id}>{preference.label}</label>
-                <Checkbox
-                  key={preference.id}
-                  id={preference.id}
-                  checked={selectedPreferences.includes(preference.id)}
-                  onCheckedChange={() => {
-                    if (selectedPreferences.includes(preference.id)) {
-                      setSelectedPreferences(
-                        selectedPreferences.filter(
-                          (item) => item !== preference.id
-                        )
-                      );
-                    } else {
-                      setSelectedPreferences([
-                        ...selectedPreferences,
-                        preference.id,
-                      ]);
-                    }
-                  }}
-                />
-              </div>
-            ))}
+          <div className="flex gap-4">
+            <div className="flex flex-col gap-2">
+              {foodPreferences?.map((preference) => (
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    key={preference.id}
+                    id={preference.id}
+                    checked={selectedPreferences.includes(preference.id)}
+                    onCheckedChange={() => {
+                      if (selectedPreferences.includes(preference.id)) {
+                        setSelectedPreferences(
+                          selectedPreferences.filter(
+                            (item) => item !== preference.id
+                          )
+                        );
+                      } else {
+                        setSelectedPreferences([
+                          ...selectedPreferences,
+                          preference.id,
+                        ]);
+                      }
+                    }}
+                  />
+                  <label htmlFor={preference.id}>{preference.label}</label>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-col gap-2">
+              {mealChoices?.map((choice) => (
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    key={choice.id}
+                    id={choice.id}
+                    checked={selectedMeal?.includes(choice.id)}
+                    onCheckedChange={() => {
+                      if (selectedMeal?.includes(choice.id)) {
+                        setSelectedMeal("");
+                      } else {
+                        setSelectedMeal(choice.id);
+                      }
+                    }}
+                  />
+                  <label htmlFor={choice.id}>{choice.label}</label>
+                </div>
+              ))}
+            </div>
           </div>
           <Button variant="outline" onClick={handleClick}>
             Find Recipes
