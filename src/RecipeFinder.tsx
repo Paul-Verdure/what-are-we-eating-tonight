@@ -73,7 +73,7 @@ export default function RecipeFinder() {
           <div className="flex gap-2">
             <FinderInputs setSelectedIngredients={setSelectedIngredients} />
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-8">
             <div className="flex flex-col gap-2">
               {foodPreferences?.map((preference) => (
                 <div className="flex items-center space-x-2">
