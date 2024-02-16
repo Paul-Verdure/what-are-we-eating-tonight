@@ -25,9 +25,10 @@ const FormSchema = z.object({
 
 type FinderInputsProps = {
   setSelectedIngredients: Dispatch<React.SetStateAction<string[]>>;
+  isListFull: boolean;
 };
 
-export function FinderInputs({ setSelectedIngredients }: FinderInputsProps) {
+export function FinderInputs({ setSelectedIngredients, isListFull }: FinderInputsProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -42,6 +43,7 @@ export function FinderInputs({ setSelectedIngredients }: FinderInputsProps) {
   };
 
   async function handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (isListFull) return;
     if (e.key === "Enter") {
       await form.handleSubmit(onSubmit)();
     }
@@ -70,6 +72,7 @@ export function FinderInputs({ setSelectedIngredients }: FinderInputsProps) {
           type="submit"
           onClick={form.handleSubmit(onSubmit)}
           className="flex items-center"
+          disabled={isListFull}
         >
           <PlusIcon />
         </Button>
