@@ -43,7 +43,6 @@ export default function RecipeFinder() {
       preferences: selectedPreferences,
     })
       .then((result) => {
-        console.log(result);
         if (result) {
           setResponse(JSON.parse(result));
           setLoading(false);
