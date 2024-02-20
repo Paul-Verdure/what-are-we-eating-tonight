@@ -28,7 +28,10 @@ type FinderInputsProps = {
   isListFull: boolean;
 };
 
-export function FinderInputs({ setSelectedIngredients, isListFull }: FinderInputsProps) {
+export function FinderInputs({
+  setSelectedIngredients,
+  isListFull,
+}: FinderInputsProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
