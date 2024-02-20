@@ -13,8 +13,21 @@ import {
 import { Checkbox } from "./components/ui/checkbox";
 import { Cross1Icon } from "@radix-ui/react-icons";
 
+const defaultIngredients = [
+  "potato",
+  "carrot",
+  "onion",
+  "garlic",
+  "tomato",
+  "pasta",
+  "butter",
+  "creamcheese",
+  "chicken",
+];
+
 export default function RecipeFinder() {
-  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+  const [selectedIngredients, setSelectedIngredients] =
+    useState<string[]>(defaultIngredients);
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
   const [selectedMeal, setSelectedMeal] = useState<string>();
   const [response, setResponse] = useState<RecipeOptions>([]);
@@ -25,7 +38,10 @@ export default function RecipeFinder() {
 
   function handleClick() {
     setLoading(true);
-    getTitles({ ingredients: selectedIngredients })
+    getTitles({
+      ingredients: selectedIngredients,
+      preferences: selectedPreferences,
+    })
       .then((result) => {
         console.log(result);
         if (result) {
@@ -73,7 +89,10 @@ export default function RecipeFinder() {
             ))}
           </div>
           <div className="flex gap-2">
-            <FinderInputs setSelectedIngredients={setSelectedIngredients} isListFull={isListFull} />
+            <FinderInputs
+              setSelectedIngredients={setSelectedIngredients}
+              isListFull={isListFull}
+            />
           </div>
           <div className="flex gap-8">
             <div className="flex flex-col gap-2">
