@@ -150,20 +150,28 @@ export default function RecipeFinder() {
               </h3>
             </div>
           ) : (
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {response?.map((recipe) => (
-                <Card>
-                  <CardContent className="p-4">
-                    <h3 className="font-semibold tracking-tight">
-                      {recipe?.title}
-                    </h3>
-                    <p className="text-sm leading-none text-gray-500 dark:text-gray-400">
-                      {recipe?.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            <>
+              {response?.length !== 0 && (
+                <h3 className="font-semibold tracking-tight text-center">
+                  {response?.length} Recipes Found - Select one to view cooking
+                  steps
+                </h3>
+              )}
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {response?.map((recipe) => (
+                  <Card>
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold tracking-tight">
+                        {recipe?.title}
+                      </h3>
+                      <p className="text-sm leading-none text-gray-500 dark:text-gray-400">
+                        {recipe?.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>
