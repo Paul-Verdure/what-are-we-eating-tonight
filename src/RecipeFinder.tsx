@@ -12,6 +12,7 @@ import {
 } from "./components/FinderInputs/checkboxLists";
 import { Checkbox } from "./components/ui/checkbox";
 import { Cross1Icon } from "@radix-ui/react-icons";
+import { RecipeDetailsDialog } from "./components/RecipeDetailsDialog/RecipeDetailsDialog";
 
 const defaultIngredients = [
   "potato",
@@ -61,6 +62,10 @@ export default function RecipeFinder() {
   }
 
   const isListFull = selectedIngredients.length === 10;
+
+  const handleRecipeClick = (recipe: string) => {
+    console.log(recipe);
+  }
 
   return (
     <section className="w-full py-12">
@@ -167,6 +172,7 @@ export default function RecipeFinder() {
                       <p className="text-sm leading-none text-gray-500 dark:text-gray-400">
                         {recipe?.description}
                       </p>
+                      <RecipeDetailsDialog title={recipe?.title} />
                     </CardContent>
                   </Card>
                 ))}
