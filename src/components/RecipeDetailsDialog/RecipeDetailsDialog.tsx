@@ -10,12 +10,26 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { api } from "convex/_generated/api";
+import { useAction } from "convex/react";
 
 type RecipeDetailsDialogProps = {
   title: string;
 };
 
 export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
+  const getRecipeDetails = useAction(api.openai.getRecipeDetails);
+
+  const handleRecipeDetails = (recipe: string) => {
+    getRecipeDetails({ title: recipe })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>

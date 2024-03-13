@@ -34,7 +34,6 @@ export default function RecipeFinder() {
   const [response, setResponse] = useState<RecipeOptions>([]);
   const [loading, setLoading] = useState(false);
   const getTitles = useAction(api.openai.getRecipesTitles);
-  const getRecipeDetails = useAction(api.openai.getRecipeDetails);
 
   console.log(response);
 
@@ -64,15 +63,7 @@ export default function RecipeFinder() {
 
   const isListFull = selectedIngredients.length === 10;
 
-  const handleRecipeClick = (recipe: string) => {
-    getRecipeDetails({ title: recipe })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  
 
   return (
     <section className="w-full py-12">
