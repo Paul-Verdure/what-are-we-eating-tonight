@@ -2,16 +2,14 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { api } from "convex/_generated/api";
+import { api } from "../../../convex/_generated/api";
 import { useAction } from "convex/react";
+import React from "react";
 
 type RecipeDetailsDialogProps = {
   title: string;
@@ -29,6 +27,12 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
         console.log(error);
       });
   };
+
+  React.useEffect(() => {
+    handleRecipeDetails(title);
+  }
+  , [title]);
+
 
   return (
     <Dialog>
