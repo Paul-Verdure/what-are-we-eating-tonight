@@ -16,3 +16,10 @@ export type CheckboxItem = {
 };
 
 export type CheckboxItems = CheckboxItem[];
+
+export type RecipeDetails = {
+  title: string;
+  description: string;
+  ingredients: string[];
+  steps: string[];
+};
