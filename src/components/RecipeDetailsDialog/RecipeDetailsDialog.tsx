@@ -11,6 +11,7 @@ import { api } from "../../../convex/_generated/api";
 import { useAction } from "convex/react";
 import React from "react";
 import { RecipeDetails } from "@/types";
+import { set } from "date-fns";
 
 type RecipeDetailsDialogProps = {
   title: string;
@@ -18,12 +19,16 @@ type RecipeDetailsDialogProps = {
 
 export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
   const getRecipeDetails = useAction(api.openai.getRecipeDetails);
+  const [loading, setLoading] = React.useState(false);
   const [recipeDetails, setRecipeDetails] = React.useState<RecipeDetails>();
 
   const handleRecipeDetails = (recipe: string) => {
     getRecipeDetails({ title: recipe })
       .then((result) => {
-        console.log(result);
+        if (result) {
+          setRecipeDetails(JSON.parse(result));
+          
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -39,7 +44,7 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
       <DialogTrigger asChild>
         <Button variant="outline">Recipe details</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[800px]">
         <DialogHeader>
           <DialogTitle className="text-2xl">Recipe details</DialogTitle>
         </DialogHeader>
@@ -47,13 +52,15 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
           {recipeDetails && (
             <>
               <div>
-                <h1 className="font-semibold text-lg">{recipeDetails.title}</h1>
-                <p>{recipeDetails.description}</p>
+                <h1 className="font-semibold text-lg">
+                  {recipeDetails?.title}
+                </h1>
+                <p>{recipeDetails?.description}</p>
               </div>
               <section>
                 <h2 className="font-semibold text-md">Ingredients</h2>
                 <ul className="list-disc pl-6 grid gap-2 text-sm">
-                  {recipeDetails.ingredients.map((ingredient) => (
+                  {recipeDetails?.ingredients.map((ingredient) => (
                     <li key={ingredient}>{ingredient}</li>
                   ))}
                 </ul>
@@ -61,7 +68,7 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
               <section>
                 <h2 className="font-semibold text-md">Steps</h2>
                 <ol className="list-decimal pl-6 grid gap-2 text-sm">
-                  {recipeDetails.steps.map((step) => (
+                  {recipeDetails?.steps.map((step) => (
                     <li key={step}>{step}</li>
                   ))}
                 </ol>
