@@ -35,8 +35,6 @@ export default function RecipeFinder() {
   const [loading, setLoading] = useState(false);
   const getTitles = useAction(api.openai.getRecipesTitles);
 
-  console.log(response);
-
   function handleClick() {
     setLoading(true);
     getTitles({

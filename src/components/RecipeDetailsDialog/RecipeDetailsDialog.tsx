@@ -42,7 +42,7 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Recipe details</Button>
+        <Button className="mt-4" variant="outline">Recipe details</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[800px]">
         <DialogHeader>
