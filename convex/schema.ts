@@ -12,7 +12,13 @@ export default defineSchema(
       ingredients: v.array(v.string()),
       instructions: v.array(v.string()),
     }),
+    users: defineTable({
+      name: v.string(),
+      // this the Clerk ID, stored in the subject JWT field
+      externalId: v.string(),
+    }).index("byExternalId", ["externalId"]),
   },
+
   // If you ever get an error about schema mismatch
   // between your data and your schema, and you cannot
   // change the schema to match the current data in your database,
