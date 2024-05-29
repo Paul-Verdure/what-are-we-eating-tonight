@@ -7,16 +7,19 @@ import { v } from "convex/values";
 
 export default defineSchema(
   {
-    recipe: defineTable({
-      name: v.string(),
-      ingredients: v.array(v.string()),
-      instructions: v.array(v.string()),
-    }),
     users: defineTable({
       name: v.string(),
       // this the Clerk ID, stored in the subject JWT field
       externalId: v.string(),
     }).index("byExternalId", ["externalId"]),
+
+    favoriteRecipes: defineTable({
+      userId: v.string(),
+      recipeId: v.string(),
+      name: v.string(),
+      ingredients: v.array(v.string()),
+      instructions: v.array(v.string()),
+    }).index("byUserId", ["userId"]),
   },
 
   // If you ever get an error about schema mismatch
