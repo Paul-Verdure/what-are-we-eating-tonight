@@ -14,6 +14,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as favoriteRecipes from "../favoriteRecipes.js";
 import type * as http from "../http.js";
 import type * as openai from "../openai.js";
 import type * as users from "../users.js";
@@ -27,6 +28,7 @@ import type * as users from "../users.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  favoriteRecipes: typeof favoriteRecipes;
   http: typeof http;
   openai: typeof openai;
   users: typeof users;
