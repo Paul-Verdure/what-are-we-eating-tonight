@@ -8,26 +8,31 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { api } from "../../../convex/_generated/api";
-import { useAction } from "convex/react";
+import { ConvexProvider, useAction, useMutation } from "convex/react";
 import React from "react";
 import { RecipeDetails } from "@/types";
-import { set } from "date-fns";
+import { v4 as uuidv4 } from "uuid";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 type RecipeDetailsDialogProps = {
   title: string;
 };
 
 export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
-  const getRecipeDetails = useAction(api.openai.getRecipeDetails);
-  const [loading, setLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
   const [recipeDetails, setRecipeDetails] = React.useState<RecipeDetails>();
+  const getRecipeDetails = useAction(api.openai.getRecipeDetails);
+
+  console.log("isOpen", isOpen);
 
   const handleRecipeDetails = (recipe: string) => {
     getRecipeDetails({ title: recipe })
       .then((result) => {
         if (result) {
-          setRecipeDetails(JSON.parse(result));
-          
+          const recipeDetails = JSON.parse(result);
+          recipeDetails.id = uuidv4();
+          setRecipeDetails(recipeDetails);
         }
       })
       .catch((error) => {
@@ -35,14 +40,52 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
       });
   };
 
-  React.useEffect(() => {
+  const saveRecipe = useMutation(api.favoriteRecipes.addRecipeAndFavorite);
+
+  const handleSaveRecipe = () => {
+    if (!recipeDetails) {
+      console.error("Recipe details are not available");
+      return;
+    }
+
+    setIsLoading(true);
+    saveRecipe({
+      recipeId: recipeDetails.id,
+      name: recipeDetails.title,
+      ingredients: recipeDetails.ingredients,
+      instructions: recipeDetails.steps,
+    })
+      .then(() => {
+        setIsLoading(false);
+      })
+      .then(() => {
+        setIsOpen(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
+  };
+
+  // React.useEffect(() => {
+  //   handleRecipeDetails(title);
+  // }, [title]);
+
+  const handleOpenDialog = () => {
+    setIsOpen(true);
     handleRecipeDetails(title);
-  }, [title]);
+  };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="mt-4" variant="outline">Recipe details</Button>
+        <Button
+          className="mt-4"
+          variant="outline"
+          onClick={() => handleOpenDialog()}
+        >
+          Recipe details
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[800px]">
         <DialogHeader>
@@ -77,7 +120,14 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
           )}
         </main>
         <DialogFooter>
-          <Button type="submit">Save in My Recipes</Button>
+          <Button
+            disabled={isLoading}
+            type="submit"
+            onClick={() => handleSaveRecipe()}
+          >
+            <PlusIcon className="w-6 h-6 mr-2" />
+            Save in My Recipes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
