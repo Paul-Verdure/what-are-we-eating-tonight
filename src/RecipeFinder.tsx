@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAction } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { RecipeOptions } from "./types";
+import { v4 as uuidv4 } from "uuid";
 
 import { FinderInputs } from "./components/FinderInputs/FinderInputs";
 import {
@@ -60,8 +61,6 @@ export default function RecipeFinder() {
   }
 
   const isListFull = selectedIngredients.length === 10;
-
-  
 
   return (
     <section className="w-full py-12">
@@ -160,7 +159,7 @@ export default function RecipeFinder() {
               )}
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                 {response?.map((recipe) => (
-                  <Card>
+                  <Card key={uuidv4()}>
                     <CardContent className="p-4">
                       <h3 className="font-semibold tracking-tight">
                         {recipe?.title}
