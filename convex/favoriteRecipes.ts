@@ -3,7 +3,6 @@ import { mutation, query } from "./_generated/server";
 import { getCurrentUser, getCurrentUserOrThrow } from "./users";
 
 export const getFavoriteRecipes = query({
-  args: {},
   handler: async (ctx) => {
     const favoriteRecipes = await ctx.db.query("favoriteRecipes").collect();
     const user = await getCurrentUser(ctx);
