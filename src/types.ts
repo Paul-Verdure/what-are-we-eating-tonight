@@ -18,6 +18,7 @@ export type CheckboxItem = {
 export type CheckboxItems = CheckboxItem[];
 
 export type RecipeDetails = {
+  id: string;
   title: string;
   description: string;
   ingredients: string[];
