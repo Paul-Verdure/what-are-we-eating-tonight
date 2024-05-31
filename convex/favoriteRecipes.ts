@@ -20,15 +20,15 @@ export const addRecipeAndFavorite = mutation({
     ingredients: v.array(v.string()),
     instructions: v.array(v.string()),
   },
-  handler: async (ctx, { recipeId, name, ingredients, instructions }) => {
+  handler: async (ctx, args) => {
     // Add the recipe to the user's favorite recipes
     const user = await getCurrentUserOrThrow(ctx);
     await ctx.db.insert("favoriteRecipes", {
       userId: user.externalId,
-      recipeId,
-      name,
-      ingredients,
-      instructions,
+      recipeId: args.recipeId,
+      name: args.name,
+      ingredients: args.ingredients,
+      instructions: args.instructions,
     });
   },
 });
