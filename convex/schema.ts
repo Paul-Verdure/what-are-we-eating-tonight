@@ -15,10 +15,10 @@ export default defineSchema(
 
     favoriteRecipes: defineTable({
       userId: v.string(),
-      recipeId: v.string(),
-      name: v.string(),
+      title: v.string(),
+      description: v.string(),
       ingredients: v.array(v.string()),
-      instructions: v.array(v.string()),
+      steps: v.array(v.string()),
     }).index("byUserId", ["userId"]),
   },
 

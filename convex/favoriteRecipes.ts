@@ -14,20 +14,20 @@ export const getFavoriteRecipes = query({
 
 export const addRecipeAndFavorite = mutation({
   args: {
-    recipeId: v.string(),
-    name: v.string(),
+    title: v.string(),
+    description: v.string(),
     ingredients: v.array(v.string()),
-    instructions: v.array(v.string()),
+    steps: v.array(v.string()),
   },
   handler: async (ctx, args) => {
     // Add the recipe to the user's favorite recipes
     const user = await getCurrentUserOrThrow(ctx);
     await ctx.db.insert("favoriteRecipes", {
       userId: user.externalId,
-      recipeId: args.recipeId,
-      name: args.name,
+      title: args.title,
+      description: args.description,
       ingredients: args.ingredients,
-      instructions: args.instructions,
+      steps: args.steps,
     });
   },
 });
