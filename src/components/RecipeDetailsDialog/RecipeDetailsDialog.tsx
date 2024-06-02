@@ -2,16 +2,15 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
+  DialogClose,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { api } from "../../../convex/_generated/api";
-import { ConvexProvider, useAction, useMutation } from "convex/react";
+import { useAction, useMutation } from "convex/react";
 import React from "react";
 import { RecipeDetails } from "@/types";
-import { v4 as uuidv4 } from "uuid";
 import { PlusIcon } from "@radix-ui/react-icons";
 
 type RecipeDetailsDialogProps = {
@@ -24,14 +23,11 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
   const [recipeDetails, setRecipeDetails] = React.useState<RecipeDetails>();
   const getRecipeDetails = useAction(api.openai.getRecipeDetails);
 
-  console.log("isOpen", isOpen);
-
   const handleRecipeDetails = (recipe: string) => {
     getRecipeDetails({ title: recipe })
       .then((result) => {
         if (result) {
           const recipeDetails = JSON.parse(result);
-          recipeDetails.id = uuidv4();
           setRecipeDetails(recipeDetails);
         }
       })
@@ -47,13 +43,13 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
       console.error("Recipe details are not available");
       return;
     }
-
+    console.log("recipeDetails", recipeDetails);
     setIsLoading(true);
     saveRecipe({
-      recipeId: recipeDetails.id,
-      name: recipeDetails.title,
+      title: recipeDetails.title,
+      description: recipeDetails.description,
       ingredients: recipeDetails.ingredients,
-      instructions: recipeDetails.steps,
+      steps: recipeDetails.steps,
     })
       .then(() => {
         setIsLoading(false);
@@ -66,10 +62,6 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
         setIsLoading(false);
       });
   };
-
-  // React.useEffect(() => {
-  //   handleRecipeDetails(title);
-  // }, [title]);
 
   const handleOpenDialog = () => {
     setIsOpen(true);
@@ -119,7 +111,7 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
             </>
           )}
         </main>
-        <DialogFooter>
+        <DialogClose>
           <Button
             disabled={isLoading}
             type="submit"
@@ -128,7 +120,7 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
             <PlusIcon className="w-6 h-6 mr-2" />
             Save in My Recipes
           </Button>
-        </DialogFooter>
+        </DialogClose>
       </DialogContent>
     </Dialog>
   );
