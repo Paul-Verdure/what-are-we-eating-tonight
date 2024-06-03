@@ -72,7 +72,7 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="mt-4"
+          className="mt-auto"
           variant="outline"
           onClick={() => handleOpenDialog()}
         >
@@ -84,7 +84,7 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
           <DialogTitle className="text-2xl">Recipe details</DialogTitle>
         </DialogHeader>
         <main className="flex flex-col gap-8">
-          {recipeDetails && (
+          {recipeDetails ? (
             <>
               <div>
                 <h1 className="font-semibold text-lg">
@@ -109,11 +109,17 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
                 </ol>
               </section>
             </>
+          ) : (
+            <div className="animate-pulse container h-60 flex items-center justify-center">
+              <h3 className="font-semibold tracking-tight text-center">
+                Loading...
+              </h3>
+            </div>
           )}
         </main>
         <DialogClose>
           <Button
-            disabled={isLoading}
+            disabled={isLoading || !recipeDetails}
             type="submit"
             onClick={() => handleSaveRecipe()}
           >
