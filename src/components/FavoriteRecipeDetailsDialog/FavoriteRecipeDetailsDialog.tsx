@@ -10,7 +10,6 @@ import {
 
 import React from "react";
 import { RecipeDetails } from "@/types";
-import { Cross2Icon } from "@radix-ui/react-icons";
 
 export function FavoriteRecipeDetailsDialog({
   recipe,
@@ -28,7 +27,7 @@ export function FavoriteRecipeDetailsDialog({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="mt-4"
+          className="mt-auto"
           variant="outline"
           onClick={() => handleOpenDialog()}
         >
