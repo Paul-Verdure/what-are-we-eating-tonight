@@ -5,15 +5,17 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 export const Route = createRootRoute({
   component: () => (
     <>
-      <div className="p-2 flex gap-2">
+      <header className="py-2 px-4 flex gap-8">
         <Link to="/" className="[&.active]:font-bold">
-          Home
+          Recipe finder
         </Link>{' '}
         <Link to="/recipes" className="[&.active]:font-bold">
-          Recipes
+          My favorite recipes
         </Link>
+        <div className="ml-auto">
         <SignOutButton />
-      </div>
+        </div>
+      </header>
       <hr />
       <Outlet />
       <TanStackRouterDevtools />
