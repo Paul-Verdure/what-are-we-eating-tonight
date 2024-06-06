@@ -11,6 +11,19 @@ module.exports = {
     },
     extend: {
       colors: {
+        'olive': {
+          '50': '#fcfae9',
+          '100': '#f8f4cf',
+          '200': '#f2eda4',
+          '300': '#e7e26f',
+          '400': '#d8d343',
+          '500': '#bebc24',
+          '600': '#979719',
+          '700': '#7d7f1a',
+          '800': '#5a5c18',
+          '900': '#4c4e19',
+          '950': '#282b08',
+      },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
