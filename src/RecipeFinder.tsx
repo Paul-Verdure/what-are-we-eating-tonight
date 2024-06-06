@@ -64,8 +64,8 @@ export default function RecipeFinder() {
 
   return (
 
-      <section className="flex flex-col gap-6">
-        <h1 className="text-3xl font-bold tracking-tighter">
+      <section className="flex flex-col gap-6 text-center md:mb-12">
+        <h1 className="text-3xl md:text-5xl tracking-tight font-bold text-color font-display">
           What are we eating tonight
         </h1>
         <p className="text-gray-500 dark:text-gray-400">
@@ -95,7 +95,7 @@ export default function RecipeFinder() {
         <div className="flex gap-8">
           <div className="flex flex-col gap-2">
             {foodPreferences?.map((preference) => (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2" key={preference.id}>
                 <Checkbox
                   key={preference.id}
                   id={preference.id}
@@ -121,7 +121,7 @@ export default function RecipeFinder() {
           </div>
           <div className="flex flex-col gap-2">
             {mealChoices?.map((choice) => (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2" key={choice.id}>
                 <Checkbox
                   key={choice.id}
                   id={choice.id}
