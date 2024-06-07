@@ -74,7 +74,7 @@ export default function RecipeFinder() {
         {selectedIngredients?.map((ingredient) => (
           <span
             key={ingredient}
-            className="flex items-center gap-1 rounded-full bg-killarney-100 px-3 py-1 text-killarney-800 dark:bg-killarney-800 dark:text-killarney-100"
+            className="flex items-center gap-1 rounded-full bg-killarney-500 px-3 py-1 text-white"
           >
             {ingredient}
             <Cross1Icon
@@ -97,7 +97,6 @@ export default function RecipeFinder() {
               <Checkbox
                 key={preference.id}
                 id={preference.id}
-                className="text-killarney-500 accent-killarney-500 dark:text-killarney-400"
                 checked={selectedPreferences.includes(preference.id)}
                 onCheckedChange={() => {
                   if (selectedPreferences.includes(preference.id)) {
@@ -141,7 +140,7 @@ export default function RecipeFinder() {
       <Button
         variant="outline"
         onClick={handleClick}
-        className="bg-killarney-500 hover:bg-killarney-700 text-white font-bold py-2 px-4 rounded"
+        className="rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700"
       >
         Find Recipes
       </Button>
@@ -166,8 +165,8 @@ export default function RecipeFinder() {
                   key={uuidv4()}
                   className="max-w-sm overflow-hidden rounded shadow-lg"
                 >
-                  <CardContent className="flex h-full flex-col justify-evenly gap-8 py-8 px-4">
-                    <h3 className="font-semibold tracking-tight text-lg">
+                  <CardContent className="flex h-full flex-col justify-evenly gap-8 px-4 py-8">
+                    <h3 className="text-lg font-semibold tracking-tight">
                       {recipe?.title}
                     </h3>
                     <p className="text-sm leading-none text-gray-500 dark:text-gray-400">
