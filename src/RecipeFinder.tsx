@@ -141,7 +141,7 @@ export default function RecipeFinder() {
       <Button
         variant="outline"
         onClick={handleClick}
-        className="mx-auto mt-4 flex items-center rounded-md bg-gradient-to-r from-killarney-500 to-killarney-600 px-4 py-2 text-white shadow-md shadow-killarney-300 transition-all duration-200 ease-in-out hover:from-killarney-500 hover:to-killarney-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-killarney-500 focus:ring-offset-2 focus:ring-offset-white"
+        className="bg-killarney-500 hover:bg-killarney-700 text-white font-bold py-2 px-4 rounded"
       >
         Find Recipes
       </Button>
