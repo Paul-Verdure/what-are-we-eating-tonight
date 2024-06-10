@@ -1,6 +1,4 @@
-import { CheckboxItems } from "@/types";
-
-export const foodPreferences: CheckboxItems = [
+export const foodPreferences = [
   {
     id: "vegetarian",
     label: "Vegetarian",
@@ -39,7 +37,7 @@ export const foodPreferences: CheckboxItems = [
   },
 ] as const;
 
-export const mealChoices: CheckboxItems = [
+export const mealChoices = [
   {
     id: "breakfast",
     label: "Breakfast",

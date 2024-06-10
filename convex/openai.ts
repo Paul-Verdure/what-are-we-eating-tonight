@@ -9,7 +9,7 @@ const openai = new OpenAI({
 
 export const getRecipesTitles = action({
   args: { ingredients: v.array(v.string()), preferences: v.array(v.string()) },
-  handler: async (ctx, { ingredients, preferences }) => {
+  handler: async (_ctx, { ingredients, preferences }) => {
 
     const prompt = `Create a list of up to 8 ${preferences.join(
       ", "
@@ -62,7 +62,8 @@ export const getRecipesTitles = action({
 
 export const getRecipeDetails = action({
   args: { title: v.string() },
-  handler: async (ctx, { title }) => {
+  handler: async (_ctx, { title }) => {
+
     const prompt = `Provide the details for the recipe: ${title}.
     Provide an RFC8259 compliant JSON response without explanations:
     {
