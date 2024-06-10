@@ -65,11 +65,15 @@ export default function RecipeFinder() {
   return (
     <section className="text-center md:mb-12">
       <h1 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
-        What are we eating tonight
+        What are we eating tonight ?
       </h1>
       <p className="mt-4 text-gray-500 dark:text-gray-400">
         Check what's in the fridge and let's find a recipe for tonight's dinner.
       </p>
+        <FinderInputs
+          setSelectedIngredients={setSelectedIngredients}
+          isListFull={isListFull}
+        />
       <div className="mt-8 flex flex-wrap gap-2">
         {selectedIngredients?.map((ingredient) => (
           <span
@@ -84,14 +88,8 @@ export default function RecipeFinder() {
           </span>
         ))}
       </div>
-      <div className="mt-4 flex gap-2">
-        <FinderInputs
-          setSelectedIngredients={setSelectedIngredients}
-          isListFull={isListFull}
-        />
-      </div>
-      <div className="mt-4 flex gap-8">
-        <div className="flex flex-col gap-2">
+      <div className="mt-12 flex flex-col gap-2">
+        <div className="flex flex-wrap justify-start gap-4">
           {foodPreferences?.map((preference) => (
             <div className="flex items-center space-x-2" key={preference.id}>
               <Checkbox
@@ -117,7 +115,7 @@ export default function RecipeFinder() {
             </div>
           ))}
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-wrap justify-start gap-4">
           {mealChoices?.map((choice) => (
             <div className="flex items-center space-x-2" key={choice.id}>
               <Checkbox
@@ -140,7 +138,7 @@ export default function RecipeFinder() {
       <Button
         variant="outline"
         onClick={handleClick}
-        className="rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700"
+        className="mt-12 rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700"
       >
         Find Recipes
       </Button>
@@ -148,7 +146,7 @@ export default function RecipeFinder() {
         {loading ? (
           <div className="container animate-pulse">
             <h3 className="text-center font-semibold tracking-tight">
-              Loading...
+              Loading... Can you smell what this app is cooking?
             </h3>
           </div>
         ) : (
@@ -165,7 +163,7 @@ export default function RecipeFinder() {
                   key={uuidv4()}
                   className="max-w-sm overflow-hidden rounded shadow-lg"
                 >
-                  <CardContent className="flex h-full flex-col justify-evenly gap-8 px-4 py-8">
+                  <CardContent className="flex h-full flex-col justify-between gap-8 px-4 py-8">
                     <h3 className="text-lg font-semibold tracking-tight">
                       {recipe?.title}
                     </h3>
