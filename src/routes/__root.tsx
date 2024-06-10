@@ -7,7 +7,7 @@ export const Route = createRootRoute({
     <>
       <header className="py-2 px-4 flex gap-8">
         <Link to="/" className="[&.active]:font-bold">
-          Recipe finder
+          Recipe Finder
         </Link>{' '}
         <Link to="/recipes" className="[&.active]:font-bold">
           My favorite recipes

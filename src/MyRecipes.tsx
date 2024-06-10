@@ -11,7 +11,7 @@ export default function MyRecipes() {
       <h1 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
         My favorite recipes
       </h1>
-      <p className="mt-4 text-gray-500 dark:text-gray-400">
+      <p className="mt-4 text-gray-500 dark:text-gray-400 text-lg">
         Here are the recipes you saved. Enjoy! 😋
       </p>
       {favoriteRecipes ? (

@@ -65,9 +65,9 @@ export default function RecipeFinder() {
   return (
     <section className="text-center md:mb-12">
       <h1 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
-        What are we eating tonight ?
+        Recipe Finder 🍳
       </h1>
-      <p className="mt-4 text-gray-500 dark:text-gray-400">
+      <p className="mt-4 text-gray-500 dark:text-gray-400 text-lg">
         Enter your ingredients and preferences to find the perfect recipe! 🍽️
       </p>
       <FinderInputs
