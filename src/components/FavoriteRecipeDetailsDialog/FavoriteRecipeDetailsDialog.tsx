@@ -27,21 +27,21 @@ export function FavoriteRecipeDetailsDialog({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700"
+          className="rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700 hover:text-white"
           variant="outline"
           onClick={() => handleOpenDialog()}
         >
           Recipe details
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[800px]">
+      <DialogContent className="h-[90%] overflow-y-auto sm:max-w-[800px]">
         <DialogHeader>
           <DialogTitle className="text-2xl">Recipe details</DialogTitle>
         </DialogHeader>
         <main className="flex flex-col gap-8">
           <>
             <div>
-              <h1 className="text-lg font-semibold">{title}</h1>
+              <h1 className="text-xl font-semibold">{title}</h1>
               <p>{description}</p>
             </div>
             <section>

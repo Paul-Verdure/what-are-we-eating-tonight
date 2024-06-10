@@ -43,7 +43,6 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
       console.error('Recipe details are not available')
       return
     }
-    console.log('recipeDetails', recipeDetails)
     setIsLoading(true)
     saveRecipe({
       title: recipeDetails.title,
@@ -72,14 +71,14 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
-          className="rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700"
+          className="rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700 hover:text-white"
           variant="outline"
           onClick={() => handleOpenDialog()}
         >
           Recipe details
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[800px]">
+      <DialogContent className="h-[90%] overflow-y-auto sm:max-w-[800px]">
         <DialogHeader>
           <DialogTitle className="text-2xl">Recipe details</DialogTitle>
         </DialogHeader>
@@ -87,7 +86,7 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
           {recipeDetails ? (
             <>
               <div>
-                <h1 className="text-lg font-semibold">
+                <h1 className="text-xl font-semibold">
                   {recipeDetails?.title}
                 </h1>
                 <p>{recipeDetails?.description}</p>
@@ -112,7 +111,7 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
           ) : (
             <div className="container flex h-60 animate-pulse items-center justify-center">
               <h3 className="text-center font-semibold tracking-tight">
-                Loading...
+                Loading the recipe details... 🍳
               </h3>
             </div>
           )}
@@ -122,7 +121,8 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
             disabled={isLoading || !recipeDetails}
             type="submit"
             onClick={() => handleSaveRecipe()}
-            className="bg-killarney-500 hover:bg-killarney-700 text-white font-bold py-2 px-4 rounded"          >
+            className="rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700 hover:text-white"
+          >
             <PlusIcon className="mr-2 h-6 w-6" />
             Save in My Recipes
           </Button>
