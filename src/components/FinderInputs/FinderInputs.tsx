@@ -74,7 +74,7 @@ export function FinderInputs({
             )}
           />
           {isListFull && (
-            <p className="text-left text-xs font-semibold text-red-800 mt-1">
+            <p className="mt-1 text-left text-xs font-semibold text-red-800">
               You can only add up to 10 ingredients.
             </p>
           )}

@@ -1,6 +1,7 @@
-import { SignOutButton } from '@clerk/clerk-react'
+import { SignIn, SignInButton, SignOutButton } from '@clerk/clerk-react'
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { Authenticated, Unauthenticated } from 'convex/react'
 
 export const Route = createRootRoute({
   component: () => (
@@ -9,11 +10,18 @@ export const Route = createRootRoute({
         <Link to="/" className="[&.active]:font-bold">
           Recipe Finder
         </Link>{' '}
+        <Authenticated>
         <Link to="/recipes" className="[&.active]:font-bold">
           My favorite recipes
         </Link>
+        </Authenticated>
         <div className="ml-auto">
+         <Authenticated> 
         <SignOutButton />
+        </Authenticated>
+        <Unauthenticated>
+          <SignInButton />
+        </Unauthenticated>
         </div>
       </header>
       <hr />

@@ -8,10 +8,16 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { api } from '../../../convex/_generated/api'
-import { useAction, useMutation } from 'convex/react'
+import {
+  Authenticated,
+  Unauthenticated,
+  useAction,
+  useMutation,
+} from 'convex/react'
 import React from 'react'
 import { RecipeDetails } from '@/types'
 import { PlusIcon } from '@radix-ui/react-icons'
+import { SignInButton } from '@clerk/clerk-react'
 
 type RecipeDetailsDialogProps = {
   title: string
@@ -117,15 +123,27 @@ export function RecipeDetailsDialog({ title }: RecipeDetailsDialogProps) {
           )}
         </main>
         <DialogClose>
-          <Button
-            disabled={isLoading || !recipeDetails}
-            type="submit"
-            onClick={() => handleSaveRecipe()}
-            className="rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700 hover:text-white"
-          >
-            <PlusIcon className="mr-2 h-6 w-6" />
-            Save in My Recipes
-          </Button>
+          <Authenticated>
+            <Button
+              disabled={isLoading || !recipeDetails}
+              type="submit"
+              onClick={() => handleSaveRecipe()}
+              className="rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700 hover:text-white"
+            >
+              <PlusIcon className="mr-2 h-6 w-6" />
+              Save in My Recipes
+            </Button>
+          </Authenticated>
+          <Unauthenticated>
+            <SignInButton mode="modal" afterSignInUrl="/">
+              <Button
+                variant="outline"
+                className="mt-12 rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700 hover:text-white"
+              >
+                Sign in to save this recipe
+              </Button>
+            </SignInButton>
+          </Unauthenticated>
         </DialogClose>
       </DialogContent>
     </Dialog>

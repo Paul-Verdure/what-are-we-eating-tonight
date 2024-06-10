@@ -67,7 +67,7 @@ export default function RecipeFinder() {
       <h1 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
         Recipe Finder 🍳
       </h1>
-      <p className="mt-4 text-gray-500 dark:text-gray-400 text-lg">
+      <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
         Enter your ingredients and preferences to find the perfect recipe! 🍽️
       </p>
       <FinderInputs
@@ -138,7 +138,7 @@ export default function RecipeFinder() {
       <Button
         variant="outline"
         onClick={handleClick}
-        className="rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700 hover:text-white mt-12"
+        className="mt-12 rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700 hover:text-white"
       >
         Find Recipes
       </Button>
@@ -153,8 +153,8 @@ export default function RecipeFinder() {
           <>
             {response?.length !== 0 && (
               <h3 className="text-center text-2xl font-semibold tracking-tight">
-                {response?.length} recipes found - Click to view cooking
-                steps and ingredients 🍳
+                {response?.length} recipes found - Click to view cooking steps
+                and ingredients 🍳
               </h3>
             )}
             <div className="mt-8 grid place-content-center gap-6 md:grid-cols-2 lg:grid-cols-4">
