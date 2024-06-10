@@ -15,21 +15,8 @@ import { Checkbox } from './components/ui/checkbox'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import { RecipeDetailsDialog } from './components/RecipeDetailsDialog/RecipeDetailsDialog'
 
-const defaultIngredients = [
-  'potato',
-  'carrot',
-  'onion',
-  'garlic',
-  'tomato',
-  'pasta',
-  'butter',
-  'creamcheese',
-  'chicken',
-]
-
 export default function RecipeFinder() {
-  const [selectedIngredients, setSelectedIngredients] =
-    useState<string[]>(defaultIngredients)
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([])
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([])
   const [selectedMeal, setSelectedMeal] = useState<string>()
   const [response, setResponse] = useState<RecipeOptions>([])
@@ -137,6 +124,7 @@ export default function RecipeFinder() {
       </div>
       <Button
         variant="outline"
+        disabled={selectedIngredients.length === 0}
         onClick={handleClick}
         className="mt-12 rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700 hover:text-white"
       >
