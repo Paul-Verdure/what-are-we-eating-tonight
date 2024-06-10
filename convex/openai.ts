@@ -48,7 +48,7 @@ export const getRecipesTitles = action({
     console.log("prompt", prompt);
 
     const chatCompletion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo-0613",
+      model: "gpt-4o",
       messages: [
         { role: "system", content: "You are a helpful recipe assistant." },
         { role: "user", content: prompt },
