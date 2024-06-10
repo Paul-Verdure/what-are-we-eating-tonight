@@ -68,12 +68,12 @@ export default function RecipeFinder() {
         What are we eating tonight ?
       </h1>
       <p className="mt-4 text-gray-500 dark:text-gray-400">
-        Check what's in the fridge and let's find a recipe for tonight's dinner.
+        Enter your ingredients and preferences to find the perfect recipe! 🍽️
       </p>
-        <FinderInputs
-          setSelectedIngredients={setSelectedIngredients}
-          isListFull={isListFull}
-        />
+      <FinderInputs
+        setSelectedIngredients={setSelectedIngredients}
+        isListFull={isListFull}
+      />
       <div className="mt-8 flex flex-wrap gap-2">
         {selectedIngredients?.map((ingredient) => (
           <span
@@ -138,7 +138,7 @@ export default function RecipeFinder() {
       <Button
         variant="outline"
         onClick={handleClick}
-        className="mt-12 rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700"
+        className="rounded bg-killarney-500 px-4 py-2 font-bold text-white hover:bg-killarney-700 hover:text-white mt-12"
       >
         Find Recipes
       </Button>
@@ -146,15 +146,15 @@ export default function RecipeFinder() {
         {loading ? (
           <div className="container animate-pulse">
             <h3 className="text-center font-semibold tracking-tight">
-              Loading... Can you smell what this app is cooking?
+              Loading... Can you smell what this app is cooking? 👩🏽‍🍳
             </h3>
           </div>
         ) : (
           <>
             {response?.length !== 0 && (
               <h3 className="text-center text-2xl font-semibold tracking-tight">
-                {response?.length} Recipes Found - Select one to view cooking
-                steps
+                {response?.length} recipes found - Click to view cooking
+                steps and ingredients 🍳
               </h3>
             )}
             <div className="mt-8 grid place-content-center gap-6 md:grid-cols-2 lg:grid-cols-4">
