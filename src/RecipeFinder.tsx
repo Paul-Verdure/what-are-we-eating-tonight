@@ -102,7 +102,7 @@ export default function RecipeFinder() {
             </div>
           ))}
         </div>
-        <div className="flex flex-wrap justify-start gap-4">
+        {/* <div className="flex flex-wrap justify-start gap-4">
           {mealChoices?.map((choice) => (
             <div className="flex items-center space-x-2" key={choice.id}>
               <Checkbox
@@ -120,7 +120,7 @@ export default function RecipeFinder() {
               <label htmlFor={choice.id}>{choice.label}</label>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
       <Button
         variant="outline"
