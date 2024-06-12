@@ -9,7 +9,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { FinderInputs } from './components/FinderInputs/FinderInputs'
 import {
   foodPreferences,
-  mealChoices,
 } from './components/FinderInputs/checkboxLists'
 import { Checkbox } from './components/ui/checkbox'
 import { Cross1Icon } from '@radix-ui/react-icons'
@@ -18,7 +17,6 @@ import { RecipeDetailsDialog } from './components/RecipeDetailsDialog/RecipeDeta
 export default function RecipeFinder() {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([])
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([])
-  const [selectedMeal, setSelectedMeal] = useState<string>()
   const [response, setResponse] = useState<RecipeOptions>([])
   const [loading, setLoading] = useState(false)
   const getTitles = useAction(api.openai.getRecipesTitles)
